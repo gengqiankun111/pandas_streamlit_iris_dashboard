@@ -1,0 +1,14 @@
+# Core data processing library
+pandas>=2.0.0,<3.0.0
+
+# Interactive web framework for visualization
+streamlit>=1.28.0,<2.0.0
+
+# Enhanced data visualization (built on Matplotlib)
+seaborn>=0.12.0,<0.13.0
+
+# Base plotting library (required for Seaborn)
+matplotlib>=3.7.0,<4.0.0
+
+# Optional: Environment variable management (remove if not using .env files)
+python-dotenv>=1.0.0,<2.0.0

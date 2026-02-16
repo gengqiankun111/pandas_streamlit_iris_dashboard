@@ -1,0 +1,13 @@
+
+name: iris-dashboard
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pandas
+  - streamlit
+  - seaborn
+  - matplotlib
+  - pip
+  - pip:
+    - python-dotenv
