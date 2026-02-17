@@ -6,21 +6,33 @@ import os
 # Load .env file
 load_dotenv()
 
+
 def load_and_preprocess_iris_data():
     IRIS_CSV_URL = os.getenv("DATA_URL")
     try:
         # 1. Read online CSV data
         df = pd.read_csv(IRIS_CSV_URL)
+        df.to_csv("iris_data_sample.csv", index = False)
 
-        # 2. Data inspection: missing values, duplicate values
+        # 2. Data inspection: check for missing values and duplicate records
         missing_values = df.isnull().sum()
         duplicate_rows = df.duplicated().sum()
 
-        # 3. Data cleaning: remove duplicate values
+        # 3. Handle missing values: remove rows with null values if any exist
+        # Check if there are any missing values in the dataset
+        total_missing = missing_values.sum()
+        if total_missing > 0:
+            # Remove rows containing null values
+            df = df.dropna()
+            print(f"Removed {total_missing} missing values from the dataset")
+
+        # 4. Data cleaning: remove duplicate values
         if duplicate_rows > 0:
             df = df.drop_duplicates()
+            print(f"Removed {duplicate_rows} duplicate rows from the dataset")
 
-        # 4. Optional: reset index (index becomes discontinuous after removing duplicates)
+        # 5. Reset index after data cleaning operations
+        # Index becomes discontinuous after removing rows, so we reset it
         df = df.reset_index(drop=True)
 
         return df, missing_values, duplicate_rows
